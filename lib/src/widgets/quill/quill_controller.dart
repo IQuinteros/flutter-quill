@@ -391,6 +391,15 @@ class QuillController extends ChangeNotifier {
     if (selection != adjustedSelection) {
       _updateSelection(adjustedSelection, ChangeSource.local);
     }
+
+    if(len > 0){
+      // If there is selected text, we need to clear toggledStyles. If we don't do this, 
+      // the selected text will have the toggledStyle applied to it.
+      // So, if len is zero, we don't want to clear toggledStyle cause it's like a new line
+      // and we want to keep the toggledStyle for the new line.
+      toggledStyle = const Style();
+    }
+
     if (shouldNotifyListeners) {
       notifyListeners();
     }
